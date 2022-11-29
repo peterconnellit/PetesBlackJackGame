@@ -11,10 +11,10 @@ using namespace std;
 //CARD CLASS
 class Card
 {
+//Defines Access (attributes and methods), all can be accessed and modified from outside the Card class code
 public:
     //Define emmumerations to 1.make code more readible and 2. limit values of m_ data members
     enum cardRanks {Ace=1, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King};
-
     enum cardSuits {Clubs, Diamonds, Hearts, Spades};
 
     /*We can use overloading to send Card object to standard output operator <<
@@ -43,13 +43,44 @@ int Card::GetCardValue() const
     //Card face down value = 0
     int cardValue = 0;
 
-    //Nested loops
-    if (m_IsCardFaceUp)
-    {
+    //Nested loop for card values
+    if (m_IsCardFaceUp){
         //Card is actual value
         cardValue = m_CardRanks;
+        //Set Jack, Queen and King Face card values to 10
+        if (cardValue > 10) {
+            cardValue = 10;
+        }
     }
+    return cardValue;
 }
+
+void Card::FlipCard()
+{
+    m_IsCardFaceUp = !(m_IsCardFaceUp);
+}
+
+
+//PLAYER HAND CLASS
+class PlayerHand 
+{
+public:
+    PlayerHand();
+
+    /*Virtual functions ensure that the correct function is called for an object,
+    regardless of the type of reference(or pointer) used for function call.
+    They are mainly used to achieve Runtime polymorphism
+    Functions are declared with a virtual keyword in base class.
+    The resolving of function call is done at runtime.
+    https://www.geeksforgeeks.org/virtual-function-cpp/
+    */
+    
+    virtual ~PlayerHand();
+
+
+};
+
+
 
 
 
