@@ -72,13 +72,25 @@ public:
     They are mainly used to achieve Runtime polymorphism
     Functions are declared with a virtual keyword in base class.
     The resolving of function call is done at runtime.
-    https://www.geeksforgeeks.org/virtual-function-cpp/
-    */
-    
+    https://www.geeksforgeeks.org/virtual-function-cpp/ */
     virtual ~PlayerHand();
 
+    /*Add card to the PlayerHand using pointers.
+    We do not want to create a new card, so we use pointers to reference existing card*/
+    void Add(Card* pCard);
 
+    //Clear PlayerHand of all cards
+    void Clear();
+
+    //Get PlayerHand total value of cards, Ace is treated as 1 or 11 based on other cards in PlayerHand
+    int GetHandTotal() const;
+
+//vector with pointer is inaccessible outside the class, but can be accessed by any subclasses
+protected:
+    vector<Card*> m_Cards;
 };
+
+
 
 
 
