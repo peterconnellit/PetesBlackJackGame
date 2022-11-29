@@ -11,7 +11,7 @@ using namespace std;
 //CARD CLASS
 class Card
 {
-//Defines Access (attributes and methods), all can be accessed and modified from outside the Card class code
+//Defines Access (attributes and methods), all can be accessed and modified from outside the Card class
 public:
     //Define emmumerations to 1.make code more readible and 2. limit values of m_ data members
     enum cardRanks {Ace=1, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King};
@@ -88,8 +88,9 @@ public:
 /*Vector with pointer is inaccessible outside the class, but can be accessed by any subclass.
 Vectors are dynamic and can resize when an element is inserted or deleted.
 Advantages = can insert cards easily and can store multiple objects (in our case card pointers)
-Disadvantages = Memory consumption is more (Non-contiguous) and data is not indexed (Array's are)
+Disadvantages = Memory consumption is more (Non-contiguous) and data is not indexed (Array's are).
 https://www.mygreatlearning.com/blog/vectors-in-c/#:~:text=Vectors%20in%20C%2B%2B%20are%20sequence,regular%20pointers%20to%20its%20elements.
+Memory management will be rectified later on.
 Vector works well for our small program.*/
 protected:
     vector<Card*> m_HandCards;
@@ -112,6 +113,19 @@ void PlayerHand::Add(Card* pCard)
     m_HandCards.push_back(pCard);
 }
 
+/*Vector memory management*/
+void PlayerHand::Clear()
+{
+    //Free memory on heap by iterating through vector
+    vector<Card*>::iterator cardIter = m_HandCards.begin();
+    for(cardIter = m_HandCards.begin(); cardIter !=m_HandCards.end(); ++cardIter)
+    {
+        delete* cardIter;
+        *cardIter = 0;
+    }
+    //Clears vector of pointers
+    m_HandCards.clear();
+}
 
 
 
