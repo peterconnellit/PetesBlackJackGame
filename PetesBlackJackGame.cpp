@@ -213,7 +213,7 @@ bool BasePlayer::PlayerBusted()const
 void BasePlayer::HasBust() const
 {
     cout << "O dear " << m_PlayerName << " has bust....\n";
-    cout << "If at first you dont succeed, It's probably never going to happen!!!";
+    cout << "If at first you dont succeed, It's probably never going to happen!!!\n\n";
 }
 
 
@@ -226,17 +226,17 @@ public:
 
     virtual ~HumanPlayer();
 
-    //Does player want to continue to hit.
+    //Does player want to continue to hit. Inherited from BasePlayer class
     virtual bool PlayerHit() const;
 
     //Player wins
-    void PlayerWin() const;
+    void PlayerWins() const;
 
     //Player loses
-    void PlayerLose() const;
+    void PlayerLoses() const;
 
     //Player pushes
-    void PlayerPush() const;
+    void PlayerPushes() const;
 };
 
 HumanPlayer::HumanPlayer(const string& playerName) :
@@ -252,6 +252,23 @@ bool HumanPlayer::PlayerHit() const
     cin >> answer;
     return (answer == 'y' || answer == 'Y');
 }
+
+//Outputs to player decisions 
+void HumanPlayer::PlayerWins() const
+{
+    cout << m_PlayerName << "You win.... ya filthy animal!!!\n\n";
+}
+
+void HumanPlayer::PlayerLoses() const
+{
+    cout << m_PlayerName << " loses. Machine (not) learning anything here!!!\n\n";
+}
+
+void HumanPlayer::PlayerPushes() const
+{
+    cout << m_PlayerName << " pushes.\n\n";
+}
+
 
 
 
