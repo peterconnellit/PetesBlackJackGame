@@ -23,7 +23,7 @@ public:
 
     Card(cardRanks r = Ace, cardSuits s = Spades, bool ifu = true);
 
-    //GetCardValue returns the value of a card 1 to 11 (Ace value = 11, face down value = 0)
+    //GetCardValue returns the value of a card 1 to 11 (Ace value = 1 or 11)
     int GetCardValue() const;
 
     //FlipCard() flips card face up or down depending on state
@@ -37,6 +37,19 @@ private:
 
 //Scope resolution operator used to reference identifiers
 Card::Card(cardRanks r, cardSuits s, bool ifu) : m_CardRanks(r), m_CardSuits(s), m_IsCardFaceUp(ifu) {}
+
+int Card::GetCardValue() const
+{
+    //Card face down value = 0
+    int cardValue = 0;
+
+    //Nested loops
+    if (m_IsCardFaceUp)
+    {
+        //Card is actual value
+        cardValue = m_CardRanks;
+    }
+}
 
 
 
