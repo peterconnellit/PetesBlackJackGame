@@ -127,6 +127,47 @@ void PlayerHand::Clear()
     m_HandCards.clear();
 }
 
+int PlayerHand::GetHandTotal() const
+{
+    //If PlayerHand has no cards, return 0
+    if (m_HandCards.empty()) {
+        return 0;
+    }
+
+    //If first card is face down, card value = 0, so return 0.
+    if (m_HandCards[0]->GetCardValue() == 0)
+    {
+        return 0;
+    }
+
+    //Add card values, treat Ace as 1
+    int handTotal = 0;
+    vector<Card*>::const_iterator cardIter;
+    for (cardIter = m_HandCards.begin(); cardIter != m_HandCards.end(); ++cardIter)
+    {
+        handTotal += (*cardIter)->GetCardValue();
+    }
+
+    //If PlayerHand already has Ace
+    bool hasAce = false;
+    for (cardIter = m_HandCards.begin(); cardIter != m_HandCards.end(); ++cardIter)
+    {
+        if ((*cardIter)->GetCardValue() == Card::Ace) {
+            hasAce = true;
+        }
+    }
+
+    //Treat Ace as 11 if PlayerHand is low enough for it
+    if (hasAce && handTotal <= 11)
+    {
+        //Add 10 (Ace already has a value of 1)
+        handTotal += 10;
+    }
+
+    return handTotal;
+
+}
+
 
 
 
