@@ -212,7 +212,45 @@ bool BasePlayer::PlayerBusted()const
 
 void BasePlayer::HasBust() const
 {
-    cout << "O dear " << m_PlayerName << " has bust...\n\n";
+    cout << "O dear " << m_PlayerName << " has bust....\n";
+    cout << "If at first you dont succeed, It's probably never going to happen!!!";
+}
+
+
+//HUMAN PLAYER CLASS
+//Derived from BasePlayer class
+class HumanPlayer : public BasePlayer
+{
+public:
+    HumanPlayer(const string& playerName = "");
+
+    virtual ~HumanPlayer();
+
+    //Does player want to continue to hit.
+    virtual bool PlayerHit() const;
+
+    //Player wins
+    void PlayerWin() const;
+
+    //Player loses
+    void PlayerLose() const;
+
+    //Player pushes
+    void PlayerPush() const;
+};
+
+HumanPlayer::HumanPlayer(const string& playerName) :
+    BasePlayer(playerName)
+{}
+HumanPlayer::~HumanPlayer()
+{}
+
+bool HumanPlayer::PlayerHit() const
+{
+    cout << m_PlayerName << ", everyone has the right to be stupid...do you want a hit? (Y/N):";
+    char answer;
+    cin >> answer;
+    return (answer == 'y' || answer == 'Y');
 }
 
 
