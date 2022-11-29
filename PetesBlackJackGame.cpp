@@ -8,19 +8,22 @@
 
 using namespace std;
 
+//CARD CLASS
 class Card
 {
 public:
+    //Define emmumerations to 1.make code more readible and 2. limit values of m_ data members
     enum cardRanks {Ace=1, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King};
 
     enum cardSuits {Clubs, Diamonds, Hearts, Spades};
 
-    //We can use overloading to send Card object to standard output operator <<
+    /*We can use overloading to send Card object to standard output operator <<
+    so we can display card object on screen*/
     friend ostream& operator << (ostream& os, const Card& aCard);
 
     Card(cardRanks r = Ace, cardSuits s = Spades, bool ifu = true);
 
-    //GetCardValue returns the value of a card
+    //GetCardValue returns the value of a card 1 to 11 (Ace value = 11, face down value = 0)
     int GetCardValue() const;
 
     //FlipCard() flips card face up or down depending on state
@@ -32,7 +35,8 @@ private:
     bool m_IsCardFaceUp;
 };
 
-
+//Scope resolution operator used to reference identifiers
+Card::Card(cardRanks r, cardSuits s, bool ifu) : m_CardRanks(r), m_CardSuits(s), m_IsCardFaceUp(ifu) {}
 
 
 
