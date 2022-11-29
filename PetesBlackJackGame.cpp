@@ -18,6 +18,14 @@ public:
     //We can use overloading to send Card object to standard output operator <<
     friend ostream& operator << (ostream& os, const Card& aCard);
 
+    Card(cardRanks r = Ace, cardSuits s = Spades, bool ifu = true);
+
+    //GetCardValue returns the value of a card
+    int GetCardValue() const;
+
+    //FlipCard() flips card face up or down depending on state
+    void FlipCard();
+
 
 
 
