@@ -26,12 +26,13 @@ public:
     //FlipCard() flips card face up or down depending on state
     void FlipCard();
 
-
-
-
-
-
+private:
+    cardRanks m_CardRanks;
+    cardSuits m_CardSuits;
+    bool m_IsCardFaceUp;
 };
+
+
 
 
 
