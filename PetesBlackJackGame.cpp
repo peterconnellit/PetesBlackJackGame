@@ -68,7 +68,7 @@ public:
     PlayerHand();
 
     /*Virtual functions ensure that the correct function is called for an object,
-    regardless of the type of reference(or pointer) used for function call.
+    regardless of the type of reference (or pointer) used for function call.
     They are mainly used to achieve Runtime polymorphism
     Functions are declared with a virtual keyword in base class.
     The resolving of function call is done at runtime.
@@ -79,7 +79,7 @@ public:
     We do not want to create a new card, so we use pointers to reference existing cards on the heap*/
     void Add(Card* pCard);
 
-    //Clear PlayerHand of all cards
+    //Clear PlayerHand of all cards by removing pointers from vector also destroys card from heap and frees occupied memory.
     void Clear();
 
     //Get PlayerHand total value of cards, Ace is treated as 1 or 11 based on other cards in PlayerHand
@@ -88,9 +88,9 @@ public:
 /*Vector with pointer is inaccessible outside the class, but can be accessed by any subclass.
 Vectors are dynamic and can resize when an element is inserted or deleted.
 Advantages = can insert cards easily and can store multiple objects (in our case card pointers)
-Disadvantages = Memory consumption is more (Non-contiguous) and data is not indexed (Array's are).
+Disadvantages = Memory consumption is more (Non-contiguous) and data is not indexed (unlike Array's).
 https://www.mygreatlearning.com/blog/vectors-in-c/#:~:text=Vectors%20in%20C%2B%2B%20are%20sequence,regular%20pointers%20to%20its%20elements.
-Memory management will be rectified later on.
+Memory management will be rectified with Clear().
 Vector works well for our small program.*/
 protected:
     vector<Card*> m_HandCards;
@@ -113,7 +113,7 @@ void PlayerHand::Add(Card* pCard)
     m_HandCards.push_back(pCard);
 }
 
-/*Vector memory management*/
+//Vector memory management//
 void PlayerHand::Clear()
 {
     //Free memory on heap by iterating through vector
@@ -165,7 +165,54 @@ int PlayerHand::GetHandTotal() const
     }
 
     return handTotal;
+}
 
+
+//BASE PLAYER CLASS
+//Common elements for both human and computer players to inherit
+class BasePlayer : public PlayerHand
+{
+    /*Overloaded friend << operator can now display BasePlayer objects on screen.
+    References to BasePlayer are accepted, and as a result so are Player and House objects */
+    friend ostream& operator << (ostream& os, const BasePlayer& aBasePlayer);
+
+public:
+    //A string object is accepted for the name of the BasePlayer
+    BasePlayer(const string& playerName = "");
+
+    //Destructor inherits virtual trait from PlayerHand
+    virtual ~BasePlayer();
+
+    /*Does player want to continue to hit.
+    Function has no meaning for BasePlayer class, becomes purely virtual meaning abstract.
+    Both player and house will require their own implimentation.*/
+    virtual bool PlayerHit() const = 0;
+
+    //If player has total greater than 21, returns bust. Applies to all Players and also House
+    bool PlayerBusted() const;
+
+    //Notify players or House of bust. Applies to all so definition of the member function can go in this class
+    void HasBust() const;
+
+protected:
+    string m_PlayerName;
+};
+
+BasePlayer::BasePlayer(const string& playerName) :
+    m_PlayerName(playerName)
+{}
+
+BasePlayer::~BasePlayer()
+{}
+
+bool BasePlayer::PlayerBusted()const
+{
+    return (GetHandTotal() > 21);
+}
+
+void BasePlayer::HasBust() const
+{
+    cout << "O dear " << m_PlayerName << " has bust...\n\n";
 }
 
 
