@@ -191,7 +191,7 @@ public:
     //If player has total greater than 21, returns bust. Applies to all Players and also House
     bool PlayerBusted() const;
 
-    //Notify players or House of bust. Applies to all so definition of the member function can go in this class
+    //Notify players or House of bust. Applies to all and so definition of the member function can go in this class
     void HasBust() const;
 
 protected:
@@ -268,6 +268,25 @@ void HumanPlayer::PlayerPushes() const
 {
     cout << m_PlayerName << " pushes.\n\n";
 }
+
+
+//HOUSEPLAYER CLASS
+//Represents cpu AI opponent = Will Power. Derived from BasePlayer class
+class HousePlayer : public BasePlayer
+{
+public:
+    HousePlayer(const string& playerName = "AI Opponent = Will Power");
+
+    virtual ~HousePlayer();
+
+    //HousePlayer hitting (hits on 15 or less)
+    virtual bool PlayerHit() const;
+
+    //Hides First card
+    void HideFirstCard();
+};
+
+
 
 
 
