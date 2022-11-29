@@ -76,7 +76,7 @@ public:
     virtual ~PlayerHand();
 
     /*Add card to the PlayerHand using pointers.
-    We do not want to create a new card, so we use pointers to reference existing card*/
+    We do not want to create a new card, so we use pointers to reference existing cards on the heap*/
     void Add(Card* pCard);
 
     //Clear PlayerHand of all cards
@@ -85,11 +85,32 @@ public:
     //Get PlayerHand total value of cards, Ace is treated as 1 or 11 based on other cards in PlayerHand
     int GetHandTotal() const;
 
-//vector with pointer is inaccessible outside the class, but can be accessed by any subclasses
+/*Vector with pointer is inaccessible outside the class, but can be accessed by any subclass.
+Vectors are dynamic and can resize when an element is inserted or deleted.
+Advantages = can insert cards easily and can store multiple objects (in our case card pointers)
+Disadvantages = Memory consumption is more (Non-contiguous) and data is not indexed (Array's are)
+https://www.mygreatlearning.com/blog/vectors-in-c/#:~:text=Vectors%20in%20C%2B%2B%20are%20sequence,regular%20pointers%20to%20its%20elements.
+Vector works well for our small program.*/
 protected:
-    vector<Card*> m_Cards;
+    vector<Card*> m_HandCards;
 };
 
+PlayerHand::PlayerHand()
+{
+    //Ensure capacity is enough to contain cards
+    m_HandCards.reserve(7);
+}
+
+PlayerHand::~PlayerHand()
+{
+    Clear();
+}
+
+void PlayerHand::Add(Card* pCard)
+{
+    //Push adds new card to vector from back
+    m_HandCards.push_back(pCard);
+}
 
 
 
