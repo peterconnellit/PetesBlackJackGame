@@ -79,7 +79,7 @@ public:
     We do not want to create a new card, so we use pointers to reference existing cards on the heap*/
     void Add(Card* pCard);
 
-    //Clear PlayerHand of all cards by removing pointers from vector also destroys card from heap and frees occupied memory.
+    //Clear PlayerHand of all cards by removing pointers from vector, also destroys card from heap (freeing occupied memory).
     void Clear();
 
     //Get PlayerHand total value of cards, Ace is treated as 1 or 11 based on other cards in PlayerHand
@@ -107,6 +107,7 @@ PlayerHand::~PlayerHand()
     Clear();
 }
 
+//Pointer to card
 void PlayerHand::Add(Card* pCard)
 {
     //Push adds new card to vector from back
@@ -140,7 +141,7 @@ int PlayerHand::GetHandTotal() const
         return 0;
     }
 
-    //Add card values, treat Ace as 1
+    //Add card values, treat Ace as 1. Pointers used again
     int handTotal = 0;
     vector<Card*>::const_iterator cardIter;
     for (cardIter = m_HandCards.begin(); cardIter != m_HandCards.end(); ++cardIter)
@@ -173,7 +174,7 @@ int PlayerHand::GetHandTotal() const
 class BasePlayer : public PlayerHand
 {
     /*Overloaded friend << operator can now display BasePlayer objects on screen.
-    References to BasePlayer are accepted, and as a result so are Player and House objects */
+    References to BasePlayer are accepted, and as a result so are Player and House objects*/
     friend ostream& operator << (ostream& os, const BasePlayer& aBasePlayer);
 
 public:
@@ -188,7 +189,7 @@ public:
     Both player and house will require their own implimentation.*/
     virtual bool PlayerHit() const = 0;
 
-    //If player has total greater than 21, returns bust. Applies to all Players and also House
+    //If player has total greater than 21, returns bust. Applies to all human players and also House
     bool PlayerBusted() const;
 
     //Notify players or House of bust. Applies to all and so definition of the member function can go in this class
@@ -309,8 +310,27 @@ void HousePlayer::HideFirstCard()
 }
 
 
+//CARD DECK CLASS
+//Represents a deck of cards (derived from PlayerHand class)
+class CardDeck : public PlayerHand
+{
+public:
+    CardDeck();
 
+    virtual ~CardDeck();
 
+    //Here we create deck of 52 cards
+    void PopulateDeck();
+
+    //Shuffle deck
+    void ShuffleDeck();
+
+    //Deal single card
+    void DealCard(PlayerHand& aPlayerHand);
+
+    //Give additional cards to BasePlayer
+    void AdditionalCards(BasePlayer& aBasePlayer);
+};
 
 
 
