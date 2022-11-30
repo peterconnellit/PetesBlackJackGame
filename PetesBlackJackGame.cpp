@@ -506,7 +506,7 @@ void CreateGame::PlayGame()
                 if (pHumanPlayer->GetHandTotal() > m_HousePlayer.GetHandTotal()) {
                     pHumanPlayer->PlayerWins();
                 }
-                else if (pHumanPlayer->GetHandTotal() > m_HousePlayer.GetHandTotal()) {
+                else if (pHumanPlayer->GetHandTotal() < m_HousePlayer.GetHandTotal()) {
                     pHumanPlayer->PlayerLoses();
                 }
                 else {
