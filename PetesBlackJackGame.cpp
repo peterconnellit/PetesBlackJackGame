@@ -528,7 +528,8 @@ void CreateGame::PlayGame()
 ostream& operator<<(ostream& os, const Card& aCard);
 ostream& operator<<(ostream& os, const BasePlayer& aBasePlayer);
 
-
+//Main function gets names of player and places into vector of string objects.
+//Main next instantiates a CreateGame object passing a reference to the vector. Loop repeats if players wish.
 int main()
 {
     std::cout << "********** Welcome to Pete's Blackjack **********\n\n";
@@ -539,14 +540,54 @@ int main()
 
     int numOfPlayers = 0;
 
+    //Enter number of players
     while (numOfPlayers < 1 || numOfPlayers > 2)
     {
         cout << "How many players wish to challenge me and forever be orientated objects of ridicule? (1 - 2): ";
         cin >> numOfPlayers;
     }
 
+    //Save player name into vector
+    vector<string>playerNames;
+    string playerName;
+    for (int i = 0; i < numOfPlayers; ++i)
+    {
+        cout << "Enter your name (if you can even spell): ";
+        cin >> playerName;
+        playerNames.push_back(playerName);
+    }
 
+    cout << endl;
+
+    //Game loop used to call the CreateGame objects PlayGame member function
+    CreateGame aCreateGame(playerNames);
+    char loopAgain = 'y';
+    while (loopAgain != 'n' && loopAgain != 'N')
+    {
+        aCreateGame.PlayGame();
+        cout << "\n Your a good sport human!!!! Play again? (Y/N)";
+        cin >> loopAgain;
+    }
+    return 0;
 }
 
+// << operator is overloaded so that we can display card objects
+ostream& operator<<(ostream& os, const Card& aCard)
+{
+    //Uses rank and suit values of the object as array indices. '0' compensates for rank enum beginning with '1'.
+    const string CARDRANKS[] = { "0", "A", "2", "3", "4", "5", "6", "7", "8", "9",
+                            "10", "Jack", "Queen", "King" };
+    const string CARDSUITS[] = { "Clubs", "Diamonds", "Hearts", "Spades" };
 
+    if (aCard.m_IsCardFaceUp)
+    {
+        os << CARDRANKS[aCard.m_CardRanks] << CARDSUITS[aCard.m_CardSuits];
+    }
+    else
+    {
+        os << "??";
+    }
+
+    return os;
+}
 
