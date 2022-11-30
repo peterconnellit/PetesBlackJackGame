@@ -44,7 +44,8 @@ int Card::GetCardValue() const
     int cardValue = 0;
 
     //Nested loop for card values
-    if (m_IsCardFaceUp){
+    if (m_IsCardFaceUp)
+    {
         //Card is actual value
         cardValue = m_CardRanks;
         //Set Jack, Queen and King Face card values to 10
@@ -131,7 +132,8 @@ void PlayerHand::Clear()
 int PlayerHand::GetHandTotal() const
 {
     //If PlayerHand has no cards, return 0
-    if (m_HandCards.empty()) {
+    if (m_HandCards.empty())
+    {
         return 0;
     }
 
@@ -301,9 +303,10 @@ bool HousePlayer::PlayerHit() const
 
 void HousePlayer::HideFirstCard()
 {
-    if (!(m_HandCards.empty())) {
+    if (!(m_HandCards.empty()))
+    {
         m_HandCards[0]->FlipCard();
-    }
+    } 
     else {
         cout << "There is no card to flip!\n";
     }
@@ -362,6 +365,25 @@ void CardDeck::ShuffleDeck()
     random_shuffle(m_HandCards.begin(), m_HandCards.end());
 }
 
+/* & denotes a reference instead of a pointer to an object
+https://stackoverflow.com/questions/1943276/what-does-do-in-a-c-declaration
+A reference variable does not consume any extra memory.
+It has the same memory address as the variable it refers to.
+A pointer needs extra space for itself.
+https://www.codespeedy.com/advantages-of-reference-variables-over-pointer-variables-in-cpp/ 
+References and pointers have both been used in program as each have advantages, 
+also used for the purposes of demonstration */
+void CardDeck::DealCard(PlayerHand& aPlayerHand)
+{
+    if (!m_HandCards.empty())
+    {
+        aPlayerHand.Add(m_HandCards.back());
+        m_HandCards.pop_back();
+    }
+    else {
+        cout << "You need a break, and i'm out of cards.\n\n";
+    }
+}
 
 
 
