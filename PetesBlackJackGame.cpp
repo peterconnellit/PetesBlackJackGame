@@ -355,7 +355,12 @@ void CardDeck::PopulateDeck()
     }
 }
 
-
+void CardDeck::ShuffleDeck()
+{
+    /*Uses built-in random generator from <algorithm> Standard Template Library
+    https://learn.microsoft.com/en-us/troubleshoot/developer/visualstudio/cpp/libraries/use-random-shuffle-stl */
+    random_shuffle(m_HandCards.begin(), m_HandCards.end());
+}
 
 
 
