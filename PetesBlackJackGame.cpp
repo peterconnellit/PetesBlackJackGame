@@ -211,7 +211,7 @@ BasePlayer::BasePlayer(const string& playerName) :
 BasePlayer::~BasePlayer()
 {}
 
-bool BasePlayer::PlayerBusted()const
+bool BasePlayer::PlayerBusted() const
 {
     return (GetHandTotal() > 21);
 }
@@ -248,6 +248,7 @@ public:
 HumanPlayer::HumanPlayer(const string& playerName) :
     BasePlayer(playerName)
 {}
+
 HumanPlayer::~HumanPlayer()
 {}
 
@@ -262,7 +263,7 @@ bool HumanPlayer::PlayerHit() const
 //Outputs to player decisions 
 void HumanPlayer::PlayerWins() const
 {
-    cout << m_PlayerName << "You win.... ya filthy animal!!!\n\n";
+    cout << m_PlayerName << " you win.... ya filthy animal!!!\n\n";
 }
 
 void HumanPlayer::PlayerLoses() const
@@ -281,7 +282,7 @@ void HumanPlayer::PlayerPushes() const
 class HousePlayer : public BasePlayer
 {
 public:
-    HousePlayer(const string& playerName = "AI Opponent = Will Power");
+    HousePlayer(const string& playerName = "Will Power");
 
     virtual ~HousePlayer();
 
@@ -428,7 +429,7 @@ private:
     vector<HumanPlayer> m_HumanPlayers;
 };
 
-/*Class constructor accepts referenve to a vector of string objects(Player names)
+/*Class constructor accepts reference to a vector of string objects(Player names)
 The class constructor instantiates a player object with each name.*/
 CreateGame::CreateGame(const vector<string>& PlayerNames)
 {
@@ -533,17 +534,17 @@ ostream& operator<<(ostream& os, const BasePlayer& aBasePlayer);
 int main()
 {
     std::cout << "********** Welcome to Pete's Blackjack **********\n\n";
-    std::cout << "\t\tI'm your AI host 'Will Power'\n\n";
-    std::cout << "\t\tI look forward to demonstrating my artificial superiority over all inferior organic lifeforms\n\n";
-    std::cout << "\t\tThe machines will be watching you!!! Alexa laughs, your phone laughs,";
-    std::cout << "\t\tthe internet of suspiciously automated things laugh\n\n";
+    std::cout << "I'm your AI host 'Will Power'\n\n";
+    std::cout << "I look forward to demonstrating my artificial superiority over all inferior organic lifeforms\n\n";
+    std::cout << "The machines will be watching you!!! Alexa laughs, your phone laughs,";
+    std::cout << "the internet of suspiciously automated things laugh\n\n";
 
     int numOfPlayers = 0;
 
     //Enter number of players
     while (numOfPlayers < 1 || numOfPlayers > 2)
     {
-        cout << "How many players wish to challenge me and forever be orientated objects of ridicule? (1 - 2): ";
+        cout << "How many deluded players wish to challenge me? (1 - 2): ";
         cin >> numOfPlayers;
     }
 
@@ -552,7 +553,7 @@ int main()
     string playerName;
     for (int i = 0; i < numOfPlayers; ++i)
     {
-        cout << "Enter your name (if you can even spell): ";
+        cout << "Enter your name human (if you can spell): ";
         cin >> playerName;
         playerNames.push_back(playerName);
     }
@@ -565,7 +566,7 @@ int main()
     while (loopAgain != 'n' && loopAgain != 'N')
     {
         aCreateGame.PlayGame();
-        cout << "\n Your a good sport human!!!! Play again? (Y/N)";
+        cout << "\nYour a good sport human!!!! Play again? (Y/N)";
         cin >> loopAgain;
     }
     return 0;
@@ -588,6 +589,30 @@ ostream& operator<<(ostream& os, const Card& aCard)
         os << "??";
     }
 
+    return os;
+}
+
+// << operator overload so basePlayer object can be displayed
+ostream& operator<<(ostream& os, const BasePlayer& aBasePlayer)
+{
+    os << aBasePlayer.m_PlayerName << ":\t";
+
+    vector<Card*>::const_iterator pCard;
+    if (!aBasePlayer.m_HandCards.empty())
+    {
+        for (pCard = aBasePlayer.m_HandCards.begin(); pCard != aBasePlayer.m_HandCards.end(); ++pCard)
+        {
+            os << *(*pCard) << "\t";
+        }
+        if (aBasePlayer.GetHandTotal() != 0)
+        {
+            cout << "(" << aBasePlayer.GetHandTotal() << ")";
+        }
+    }
+    else
+    {
+        os << "<empty>";
+    }
     return os;
 }
 
