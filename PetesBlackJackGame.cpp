@@ -29,6 +29,7 @@ public:
     //FlipCard() flips card face up or down depending on state
     void FlipCard();
 
+//Encapsulation
 private:
     cardRanks m_CardRanks;
     cardSuits m_CardSuits;
@@ -176,7 +177,7 @@ int PlayerHand::GetHandTotal() const
 class BasePlayer : public PlayerHand
 {
     /*Overloaded friend << operator can now display BasePlayer objects on screen.
-    References to BasePlayer are accepted, and as a result so are Player and House objects*/
+    References to BasePlayer are accepted, and as a result so are HumanPlayer and HousePlayer objects*/
     friend ostream& operator << (ostream& os, const BasePlayer& aBasePlayer);
 
 public:
@@ -188,7 +189,8 @@ public:
 
     /*Does player want to continue to hit.
     Function has no meaning for BasePlayer class, becomes purely virtual meaning abstract.
-    Both player and house will require their own implimentation.*/
+    Both player and house will require their own implimentation.
+    Example of Abstraction*/
     virtual bool PlayerHit() const = 0;
 
     //If player has total greater than 21, returns bust. Applies to all human players and also House
@@ -197,6 +199,7 @@ public:
     //Notify players or House of bust. Applies to all and so definition of the member function can go in this class
     void HasBust() const;
 
+//Encapsulation
 protected:
     string m_PlayerName;
 };
@@ -381,11 +384,24 @@ void CardDeck::DealCard(PlayerHand& aPlayerHand)
         m_HandCards.pop_back();
     }
     else {
-        cout << "You need a break, and i'm out of cards.\n\n";
+        cout << "You need a break... and i'm out of cards!!!\n\n";
     }
 }
 
+void CardDeck::SpareCards(BasePlayer& aBasePlayer)
+{
+    cout << endl;
+    //Deal cards as long as player wants a hit and isn't already bust
+    while (!(aBasePlayer.PlayerBusted()) && aBasePlayer.PlayerHit())
+    {
+        DealCard(aBasePlayer);
+        cout << aBasePlayer << endl;
 
+        if (aBasePlayer.PlayerBusted()) {
+            aBasePlayer.HasBust();
+        }
+    }
+}
 
 
 
