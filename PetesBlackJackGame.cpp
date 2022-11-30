@@ -218,7 +218,7 @@ bool BasePlayer::PlayerBusted() const
 
 void BasePlayer::HasBust() const
 {
-    cout << "O dear " << m_PlayerName << " has bust....\n";
+    cout << "\nO dear " << m_PlayerName << " has bust....\n";
     cout << "If at first you dont succeed, It's probably never going to happen!!!\n\n";
 }
 
@@ -282,7 +282,7 @@ void HumanPlayer::PlayerPushes() const
 class HousePlayer : public BasePlayer
 {
 public:
-    HousePlayer(const string& playerName = "Will Power");
+    HousePlayer(const string& playerName = "Will");
 
     virtual ~HousePlayer();
 
@@ -536,7 +536,7 @@ int main()
     std::cout << "********** Welcome to Pete's Blackjack **********\n\n";
     std::cout << "I'm your AI host 'Will Power'\n\n";
     std::cout << "I look forward to demonstrating my artificial superiority over all inferior organic lifeforms\n\n";
-    std::cout << "The machines will be watching you!!! Alexa laughs, your phone laughs,";
+    std::cout << "Machines will be watching you!!! Will laughs, Alexa laughs, your phone laughs,";
     std::cout << "the internet of suspiciously automated things laugh\n\n";
 
     int numOfPlayers = 0;
@@ -544,7 +544,7 @@ int main()
     //Enter number of players
     while (numOfPlayers < 1 || numOfPlayers > 2)
     {
-        cout << "How many deluded players wish to challenge me? (1 - 2): ";
+        cout << "\n\nHow many deluded players wish to challenge me? (1 - 2): ";
         cin >> numOfPlayers;
     }
 
@@ -553,7 +553,7 @@ int main()
     string playerName;
     for (int i = 0; i < numOfPlayers; ++i)
     {
-        cout << "Enter your name human (if you can spell): ";
+        cout << "\nEnter your name human (if you can spell): ";
         cin >> playerName;
         playerNames.push_back(playerName);
     }
@@ -577,8 +577,8 @@ ostream& operator<<(ostream& os, const Card& aCard)
 {
     //Uses rank and suit values of the object as array indices. '0' compensates for rank enum beginning with '1'.
     const string CARDRANKS[] = { "0", "A", "2", "3", "4", "5", "6", "7", "8", "9",
-                            "10", "Jack", "Queen", "King" };
-    const string CARDSUITS[] = { "Clubs", "Diamonds", "Hearts", "Spades" };
+                            "10", "J", "Q", "K" };
+    const string CARDSUITS[] = { "C", "D", "H", "S" };
 
     if (aCard.m_IsCardFaceUp)
     {
