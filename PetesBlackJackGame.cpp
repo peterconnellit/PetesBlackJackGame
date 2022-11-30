@@ -329,8 +329,31 @@ public:
     void DealCard(PlayerHand& aPlayerHand);
 
     //Give additional cards to BasePlayer
-    void AdditionalCards(BasePlayer& aBasePlayer);
+    void SpareCards(BasePlayer& aBasePlayer);
 };
+
+CardDeck::CardDeck()
+{
+    m_HandCards.reserve(52);
+    PopulateDeck();
+}
+
+CardDeck::~CardDeck()
+{}
+
+void CardDeck::PopulateDeck()
+{
+    Clear();
+
+    //Create deck of cards (pre increment through cardsuits enum)
+    for (int s = Card::Clubs; s <= Card::Spades; ++s)
+    {
+        //Creates each card rank for each suit (Static_cast converts enums into integers)
+        for (int r = Card::Ace; r <= Card::King; ++r) {
+            Add(new Card(static_cast<Card::cardRanks>(r), static_cast<Card::cardSuits>(s)));
+        }
+    }
+}
 
 
 
