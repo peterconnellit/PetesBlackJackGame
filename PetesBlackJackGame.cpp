@@ -524,22 +524,29 @@ void CreateGame::PlayGame()
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
+//Function prototypes
+ostream& operator<<(ostream& os, const Card& aCard);
+ostream& operator<<(ostream& os, const BasePlayer& aBasePlayer);
 
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    std::cout << "********** Welcome to Pete's Blackjack **********\n\n";
+    std::cout << "\t\tI'm your AI host 'Will Power'\n\n";
+    std::cout << "\t\tI look forward to demonstrating my artificial superiority over all inferior organic lifeforms\n\n";
+    std::cout << "\t\tThe machines will be watching you!!! Alexa laughs, your phone laughs,";
+    std::cout << "\t\tthe internet of suspiciously automated things laugh\n\n";
+
+    int numOfPlayers = 0;
+
+    while (numOfPlayers < 1 || numOfPlayers > 2)
+    {
+        cout << "How many players wish to challenge me and forever be orientated objects of ridicule? (1 - 2): ";
+        cin >> numOfPlayers;
+    }
+
+
 }
+
 
 
