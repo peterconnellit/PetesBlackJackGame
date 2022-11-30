@@ -29,7 +29,7 @@ public:
     //FlipCard() flips card face up or down depending on state
     void FlipCard();
 
-//Encapsulation
+//Encapsulation = access is limited to the scope of the class https://www.atatus.com/glossary/encapsulation/ 
 private:
     cardRanks m_CardRanks;
     cardSuits m_CardSuits;
@@ -407,6 +407,9 @@ void CardDeck::SpareCards(BasePlayer& aBasePlayer)
         }
     }
 }
+
+
+
 
 
 
