@@ -19,4 +19,27 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="basePlayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="card.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="playerHand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="humanPlayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="housePlayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cardDeck.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="createGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

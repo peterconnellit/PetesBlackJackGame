@@ -129,6 +129,15 @@
   <ItemGroup>
     <ClCompile Include="PetesBlackJackGame.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="basePlayer.h" />
+    <ClInclude Include="card.h" />
+    <ClInclude Include="cardDeck.h" />
+    <ClInclude Include="createGame.h" />
+    <ClInclude Include="housePlayer.h" />
+    <ClInclude Include="humanPlayer.h" />
+    <ClInclude Include="playerHand.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
