@@ -70,6 +70,7 @@ void CardDeck::DealCard(PlayerHand& aPlayerHand)
     }
     else {
         cout << "You need a break... and i'm out of cards!!!\n\n";
+        exit(0);
     }
 }
 
