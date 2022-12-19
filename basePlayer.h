@@ -17,7 +17,7 @@ public:
 
     /*Does player want to continue to hit.
     Function has no meaning for BasePlayer class, becomes purely virtual meaning abstract.
-    Both player and house will require their own implimentation.
+    Both player and house will require their own implementation.
     Example of Abstraction*/
     virtual bool PlayerHit() const = 0;
 
