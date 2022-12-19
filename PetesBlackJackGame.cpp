@@ -1,6 +1,6 @@
 // PetesBlackJackGame.cpp : This file contains the 'main' function. Program execution begins and ends there.
 
-//Required preprocessing directives
+//Required preprocessing directives, standard template library
 #include <iostream>
 #include <string>
 #include <vector>
@@ -26,6 +26,7 @@ ostream& operator<<(ostream& os, const Card& aCard)
                             "10", "J", "Q", "K" };
     const string CARDSUITS[] = { "C", "D", "H", "S" };
 
+    //Display or hide houseplayer card
     if (aCard.m_IsCardFaceUp)
     {
         os << CARDRANKS[aCard.m_CardRanks] << CARDSUITS[aCard.m_CardSuits];
@@ -43,6 +44,7 @@ ostream& operator<<(ostream& os, const BasePlayer& aBasePlayer)
 {
     os << aBasePlayer.m_PlayerName << ":\t";
 
+    //Declare iterator for vector
     vector<Card*>::const_iterator pCard;
     if (!aBasePlayer.m_HandCards.empty())
     {
@@ -86,7 +88,7 @@ int main()
         cin >> numOfPlayers;
     }
 
-    //Save player name into vector
+    //Add player name element into vector after its current last element
     vector<string>playerNames;
     string playerName;
     for (int i = 0; i < numOfPlayers; ++i)

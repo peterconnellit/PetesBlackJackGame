@@ -5,7 +5,7 @@ class Card
 {
     //Defines Access (attributes and methods), all can be accessed and modified from outside the Card class
 public:
-    //Define emmumerations to 1.make code more readible and 2. limit values of m_ data members
+    //Define enumerations to 1.make code more readable and 2. limit values of m_ data members
     enum cardRanks { Ace = 1, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King };
     enum cardSuits { Clubs, Diamonds, Hearts, Spades };
 
