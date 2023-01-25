@@ -29,7 +29,7 @@ HumanPlayer::~HumanPlayer()
 
 bool HumanPlayer::PlayerHit() const
 {
-    cout << m_PlayerName << ", everyone has the right to be stupid...do you want a hit? (Y/N):";
+    cout << "\n" << m_PlayerName << ", everyone has the right to be stupid...do you want a hit? (Y/N):";
     char answer;
     cin >> answer;
     return (answer == 'y' || answer == 'Y');
@@ -38,15 +38,15 @@ bool HumanPlayer::PlayerHit() const
 //Outputs to player decisions 
 void HumanPlayer::PlayerWins() const
 {
-    cout << m_PlayerName << " you win.... ya filthy animal!!!\n\n";
+    cout <<"\n" << m_PlayerName << " you win.... ya filthy animal!!!\n\n";
 }
 
 void HumanPlayer::PlayerLoses() const
 {
-    cout << m_PlayerName << " loses. Machine (not) learning anything here!!!\n\n";
+    cout << "\n" << m_PlayerName << " loses. Machine (not) learning anything here!!!\n\n";
 }
 
 void HumanPlayer::PlayerPushes() const
 {
-    cout << m_PlayerName << " pushes.\n\n";
+    cout << "\n" << m_PlayerName << " pushes.\n\n";
 }

@@ -100,6 +100,9 @@ int main()
 
     cout << endl;
 
+    cout << "****Every win earns a point, the first to 4 wins****.\n";
+    cout << "****Points combine from wins and losses in a multiplayer game, so try to keep up!!!****\n\n";
+
     //Game loop used to call the CreateGame objects PlayGame member function
     CreateGame aCreateGame(playerNames);
     char loopAgain = 'y';

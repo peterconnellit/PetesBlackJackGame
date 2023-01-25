@@ -33,6 +33,6 @@ void HousePlayer::HideFirstCard()
         m_HandCards[0]->FlipCard();
     }
     else {
-        cout << "There is no card to flip!\n";
+        cout << "\nThere is no card to flip!\n";
     }
 }
