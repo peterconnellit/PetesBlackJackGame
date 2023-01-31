@@ -15,16 +15,16 @@ private:
     CardDeck m_CardDeck;
     HousePlayer m_HousePlayer;
     vector<HumanPlayer> m_HumanPlayers;
-    int playerPoints;
-    int willPoints;
+    int m_playerPoints;
+    int m_willPoints;
 };
 
 /*Class constructor accepts reference to a vector of string objects(Player names)
 The class constructor instantiates a player object with each name.*/
 CreateGame::CreateGame(const vector<string>& PlayerNames)
 {
-    playerPoints = 0;
-    willPoints = 0;
+    m_playerPoints = 0;
+    m_willPoints = 0;
     
     //Create vector of players from vector of player names
     vector<string>::const_iterator pPlayerName;
@@ -87,9 +87,9 @@ void CreateGame::PlayGame()
         {
             if (!(pHumanPlayer->PlayerBusted())) {
                 pHumanPlayer->PlayerWins();
-                ++playerPoints;
-                cout << "Human players have won " << playerPoints << " points so far\n";
-                cout << "Will has won " << willPoints << " points so far\n";
+                ++m_playerPoints;
+                cout << "Human players have won " << m_playerPoints << " points so far\n";
+                cout << "Will has won " << m_willPoints << " points so far\n";
             }
         }
     }
@@ -102,15 +102,15 @@ void CreateGame::PlayGame()
             {
                 if (pHumanPlayer->GetHandTotal() > m_HousePlayer.GetHandTotal()) {
                     pHumanPlayer->PlayerWins();                    
-                    ++playerPoints;
-                    cout << "Human players have won " << playerPoints << " points so far\n";
-                    cout << "Will has won " << willPoints << " points so far\n";
+                    ++m_playerPoints;
+                    cout << "Human players have won " << m_playerPoints << " points so far\n";
+                    cout << "Will has won " << m_willPoints << " points so far\n";
                 }
                 else if (pHumanPlayer->GetHandTotal() < m_HousePlayer.GetHandTotal()) {
                     pHumanPlayer->PlayerLoses();                    
-                    ++willPoints;
-                    cout << "Human players have won " << playerPoints << " points so far\n";
-                    cout << "Will has won " << willPoints << " points so far\n";
+                    ++m_willPoints;
+                    cout << "Human players have won " << m_playerPoints << " points so far\n";
+                    cout << "Will has won " << m_willPoints << " points so far\n";
                 }
                 else {
                     pHumanPlayer->PlayerPushes();
@@ -126,16 +126,16 @@ void CreateGame::PlayGame()
     }
     m_HousePlayer.Clear();
 
-    if (playerPoints >= 4) {
+    if (m_playerPoints >= 4) {
         cout << "You have won 4 points, humans win!!!\n";
-        playerPoints = 0;
-        willPoints = 0;
+        m_playerPoints = 0;
+        m_willPoints = 0;
     }
 
-    if (willPoints >= 4) {
+    if (m_willPoints >= 4) {
         cout << "Will has won 4 points and is the winner!!!\n";
-        playerPoints = 0;
-        willPoints = 0;
+        m_playerPoints = 0;
+        m_willPoints = 0;
     }
 
 }
